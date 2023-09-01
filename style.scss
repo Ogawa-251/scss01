@@ -1,0 +1,352 @@
+
+
+@mixin circle($val) {
+  height: $val;
+  width: $val;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($val) {
+  -webkit-animation: $val;
+  -moz-animation: $val;
+  animation: $val;
+}
+
+@mixin transform($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  -o-transform: $val;
+  transform: $val;
+}
+
+body {
+  background-color: lighten(#c4c4c3, 15%);
+}
+.cage {
+  position: fixed;
+  bottom: 0;
+  top: 50%;
+  left: -10%;
+  right: -10%;
+  background-color: #ffffff;
+  &.two {
+    .box {
+      -webkit-filter: url("#goo2");
+      filter: url("#goo2");
+    }
+  }
+  .box {
+    width: 960px;
+    margin: auto;
+    background-color: #ffffff;
+    position: relative;
+    display: block;
+    height: 300px;
+    -webkit-filter: url("#goo");
+    filter: url("#goo");
+    @include transform(translateZ(0));
+  }
+}
+.drop-one {
+  @include circle(50px);
+  position: absolute;
+  background-color: #ffffff;
+  top: 0;
+  left: 50%;
+  @include animation(big-drop 2s ease infinite);
+}
+.drop-two {
+  @include circle(40px);
+  position: absolute;
+  background-color: #ffffff;
+  top: 10px;
+  left: 51%;
+  @include animation(big-drop 2s ease infinite 0.075s);
+}
+.drop-three {
+  @include circle(20px);
+  position: absolute;
+  background-color: #ffffff;
+  top: 10px;
+  left: 51%;
+  @include animation(small-drop 2s ease infinite 1s);
+}
+.drop-four {
+  @include circle(20px);
+  position: absolute;
+  background-color: #ffffff;
+  top: 10px;
+  left: 51%;
+  @include animation(small-drop 2s ease infinite 1.075s);
+}
+
+@include keyframes(big-drop) {
+  0% {
+    top: 25%;
+  }
+  50% {
+    top: -40%;
+  }
+  100% {
+    top: 25%;
+  }
+}
+
+@include keyframes(small-drop) {
+  0% {
+    top: 25%;
+  }
+  50% {
+    top: -23%;
+  }
+  100% {
+    top: 25%;
+  }
+}
+
+.ripple {
+  @include circle(25px);
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  &.l-side {
+    left: 50%;
+    @include animation(l-side-ripple 2s ease infinite 1.2s);
+  }
+  &.r-side {
+    left: 53%;
+    @include animation(r-side-ripple 2s ease infinite 1.2s);
+  }
+}
+@include keyframes(l-side-ripple) {
+  0% {
+    left: 51%;
+    top: -30px;
+  }
+  25% {
+    left: 25%;
+    top: 0;
+  }
+  49% {
+    top: 0;
+  }
+  50% {
+    left: 51%;
+    top: -25px;
+  }
+  75% {
+    left: 35%;
+    top: 0;
+  }
+  99% {
+    left: 35%;
+    top: 0;
+  }
+  100% {
+    left: 51%;
+    top: -30px;
+  }
+}
+@include keyframes(r-side-ripple) {
+  0% {
+    left: 53%;
+    top: -30px;
+  }
+  25% {
+    left: 75%;
+    top: 0;
+  }
+  49% {
+    top: 0;
+  }
+  50% {
+    left: 53%;
+    top: -25px;
+  }
+  75% {
+    left: 65%;
+    top: 0;
+  }
+  99% {
+    top: 0;
+  }
+  100% {
+    left: 53%;
+    top: -30px;
+  }
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Quattrocento+Sans);
+$font-family-qs: 'Quattrocento Sans', sans-serif;
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  overflow: hidden;
+  .btn {
+    position: absolute;
+    top: 0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+    width: 420px;
+    height: 60px;
+    line-height: 60px;
+  	margin: auto;
+    text-align: center;
+		a {
+      position: relative;
+			display: block;
+			font-size: 36px;
+			color: #fff;
+			font-family: $font-family-qs;
+      text-transform: uppercase;
+      text-decoration: none;
+			transition: all .5s ease;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        margin: auto;
+        background: #fff;
+      }
+      &:hover::after {
+        width: 100%;
+        transition: all 1.2s linear;
+      }
+			span {
+				display: inline-block;
+				margin: 0 10px;
+        transition: all .5s 0s ease;
+        visibility: visible;
+        opacity: 1;
+        &:nth-child(5) {
+          margin-right: 20px;
+        }
+        &:nth-child(6) {
+          margin-left: 20px;
+        }
+			}
+			@for $i from 1 through 9 {
+				&:hover span:nth-child(#{$i}) {
+          transition: all 1s $i/10+s ease;
+					transform:
+            perspective(2000px)
+            translateY(random(200)-100+px)
+            translateX(random(200)-100+px)
+            translateZ(random(200)-100+px)
+            rotateX(random(720)+360+deg)
+            rotateY(random(720)+360+deg);
+          visibility: hidden;
+					opacity: 0;
+				}
+			}
+		}
+  }
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #141414;
+}
+
+h1 {
+  font-size: 9vw;
+  font-weight: 700;
+  font-family: 'Rubik', sans-serif;
+  flex: 1;
+  position: relative;
+  text-align: center;
+  margin: 0;
+  -webkit-text-fill-color: transparent;
+  background-image: url("https://images.unsplash.com/photo-1583339824000-5afecfd41835?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MzQ2fDB8MXxzZWFyY2h8OHx8VGV4dHVyZXMlMjB8ZW58MHx8fHwxNjkzNTEzNzA4fDA&ixlib=rb-4.0.3&q=80&w=1080");
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-repeat: no-repeat;
+}
+
+
+
+
+
+// グリッチ
+
+
+body{
+  background:black;
+  font-family: 'Varela', sans-serif;
+}
+
+.glitch{
+  color: white;
+  font-size: 100px;
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+  bottom: 267px;
+}
+@keyframes noise-anim{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:after{
+  content:attr(data-text);
+  position:absolute;
+  left:2px;
+  text-shadow:-1px 0 red;
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0); 
+  animation:noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:before{
+  content:attr(data-text);
+  position:absolute;
+  left:-2px;
+  text-shadow:1px 0 blue; 
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0); 
+  animation:noise-anim-2 3s infinite linear alternate-reverse;
+}

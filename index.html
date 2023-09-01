@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCSS練習</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+
+<div class="glitch" data-text="GLITCH">GLITCH</div> 
+
+
+
+
+    <div class="cage">
+        <div class="box">
+          <div class="drop-one">
+          </div>
+          <div class="drop-two">
+          </div>
+          <div class="ripple l-side">
+          </div>
+          <div class="ripple r-side">
+          </div>
+        </div>
+      </div>
+      
+      <div class="cage two">
+        <div class="box">
+          <div class="drop-three">
+          </div>
+          <div class="drop-four">
+          </div>
+        </div>
+      </div>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+          </filter>
+        </defs>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="">
+        <defs>
+          <filter id="goo2">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+          </filter>
+        </defs>
+      </svg>
+
+
+
+
+
+    
+    <script src="main.js"></script>
+</body>
+</html>
